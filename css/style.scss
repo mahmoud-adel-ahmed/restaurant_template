@@ -1,0 +1,535 @@
+@use "./partials/general" as *;
+
+/* start header */
+
+.header {
+  @include flexProps;
+  background-color: $white;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  box-shadow: $box-shadow;
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  .logo {
+    font-size: 2.5rem;
+    font-weight: bolder;
+    color: $black;
+    i {
+      color: $peru;
+      padding-right: 0.5rem;
+    }
+  }
+  .navbar {
+    a {
+      font-size: 2rem;
+      margin-left: 2rem;
+      color: $light-black;
+      &:hover {
+        color: $peru;
+      }
+    }
+  }
+}
+/* end header */
+
+/* start home*/
+.home {
+  padding: 0;
+  background: $dark-bg;
+  .slide {
+    min-height: 100vh;
+    @include flexProps;
+    justify-content: center;
+    position: relative;
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: $dark-bg;
+    }
+    .info {
+      position: relative;
+      width: 75rem;
+      text-align: center;
+      display: none;
+      span {
+        font-size: 3rem;
+        display: block;
+        padding-bottom: 0.5rem;
+        color: $light-white;
+        animation: fadeIn 0.4s cubic-bezier(0.54, 1.3, 0.63, 1.34) 0.2s
+          backwards;
+      }
+      h3 {
+        font-size: 8vw;
+        color: $white;
+        text-shadow: 0 0.5rem 1rem $peru;
+        text-transform: uppercase;
+        line-height: 1;
+        padding: 2rem 0;
+        animation: fadeIn 0.4s cubic-bezier(0.54, 1.3, 0.63, 1.34) 0.4s
+          backwards;
+      }
+      #btn {
+        animation: fadeIn 0.4s cubic-bezier(0.54, 1.3, 0.63, 1.34) 0.6s
+          backwards;
+      }
+    }
+  }
+  .swiper-slide-active {
+    .info {
+      display: inline-block;
+    }
+  }
+  .swiper-button-next,
+  .swiper-button-prev {
+    width: 5rem;
+    height: 5rem;
+    background-color: $white;
+    line-height: 5rem;
+    color: $black;
+    &::after {
+      font-size: 2rem;
+    }
+    &:hover {
+      background: $peru;
+      color: $white;
+    }
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    transform: translateX(-3rem) scale(0);
+    opacity: 0;
+  }
+}
+
+/* end home */
+
+/* start about */
+.about {
+  @include flexProps;
+  @include fWrap_fGap;
+  .image {
+    flex: 1 1 41rem;
+    img {
+      width: 100%;
+    }
+  }
+  .content {
+    flex: 1 1 41rem;
+    .title {
+      font-size: 4rem;
+      color: $black;
+    }
+    p {
+      font-size: 1.7rem;
+      color: $light-black;
+      padding: 1rem 0;
+      line-height: 2;
+    }
+    .icon-container {
+      @include flexProps;
+      @include fWrap_fGap;
+      margin-top: 2rem;
+      .icons {
+        flex: 1 1 16rem;
+        text-align: center;
+        background: $light-bg;
+        padding: 3rem 2rem;
+        img {
+          height: 5rem;
+        }
+        h3 {
+          padding-top: 1rem;
+          font-size: 2rem;
+          color: $light-black;
+          font-weight: normal;
+        }
+      }
+    }
+  }
+}
+/* end about */
+
+/* start food */
+.food {
+  background: $light-bg;
+
+  .swiper-pagination-bullet-active {
+    background: $peru;
+  }
+
+  .swiper-horizontal > .swiper-pagination-bullets,
+  .swiper-pagination-bullets.swiper-pagination-horizontal {
+    bottom: 0;
+  }
+
+  .swiper-slide-active {
+    transform: scale(1);
+    opacity: 1;
+    background: $white;
+    box-shadow: $box-shadow;
+    border: $border;
+    margin-bottom: 4rem;
+  }
+
+  .slide {
+    text-align: center;
+    padding: 4rem 2rem;
+    transform: scale(0.9);
+    border-radius: 0.5rem;
+    opacity: 0.5;
+    img {
+      height: 25rem;
+      margin-bottom: 1rem;
+    }
+    h3 {
+      font-size: 2.5rem;
+      padding: 1rem 0;
+      color: $black;
+    }
+
+    .price {
+      font-size: 2.5rem;
+      color: $peru;
+    }
+  }
+}
+/* end food */
+
+/* start food-preview-container */
+.food-preview-container {
+  background: $dark-bg;
+  position: fixed;
+  top: 0;
+  left: 0;
+  // padding: 0;
+  width: 100%;
+  height: 100%;
+  @include flexHidden;
+  z-index: 1100;
+  #close-preview {
+    position: absolute;
+    top: 1.5rem;
+    right: 2.5rem;
+    font-size: 5rem;
+    color: $white;
+    &:hover {
+      transform: rotate(90deg);
+    }
+  }
+  .food-preview {
+    text-align: center;
+    background: $white;
+    padding: 3rem 2rem;
+    border-radius: 0.5rem;
+    display: none;
+    width: 35rem;
+    cursor: pointer;
+    &.active {
+      display: block;
+      animation: fadeIn 0.4s cubic-bezier(0.54, 1.3, 0.63, 1.34) backwards;
+    }
+    img {
+      height: 25rem;
+      margin-bottom: 1rem;
+    }
+    h3 {
+      font-size: 2.5rem;
+      padding: 1rem 0;
+      color: $black;
+    }
+    .stars {
+      margin-bottom: 0.5rem;
+      i {
+        font-size: 1.7rem;
+        color: $peru;
+      }
+    }
+    p {
+      font-size: 1.6rem;
+      color: $light-black;
+      padding: 1rem 0;
+      line-height: 2;
+    }
+    .price {
+      font-size: 2.5rem;
+      color: $black;
+      margin-bottom: 0.5rem;
+    }
+  }
+}
+/* end food-preview-container */
+
+/* start gallery */
+.gallery {
+  .gallery-container {
+    @include gridProps(30rem);
+    .box {
+      width: 100%;
+      height: 40rem;
+      position: relative;
+      overflow: hidden;
+      img {
+        @include imgProps;
+      }
+      .icon {
+        @include flexHidden;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: $dark-bg;
+        i {
+          font-size: 6rem;
+          color: $white;
+        }
+      }
+      &:hover .icon {
+        display: flex;
+      }
+    }
+  }
+}
+/* end gallery */
+
+/* start menu */
+.menu {
+  background: $light-bg;
+  .slide {
+    .title {
+      padding: 1rem;
+      font-size: 3rem;
+      color: $white;
+      background-color: $peru;
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+    .box-container {
+      display: flex;
+      @include fWrap_fGap;
+      margin-bottom: 5rem;
+      .box {
+        flex: 1 1 41rem;
+        padding: 2rem;
+        background: $white;
+        box-shadow: $box-shadow;
+        @include flexProps;
+        gap: 1rem;
+        border: $border;
+        cursor: pointer;
+        .info {
+          h3 {
+            font-size: 2.5rem;
+            color: $black;
+            padding-bottom: 0.5rem;
+          }
+          p {
+            font-size: 1.6rem;
+            color: $light-black;
+            line-height: 2;
+          }
+        }
+        .price {
+          color: $peru;
+          font-size: 2.5rem;
+        }
+        &:hover {
+          transform: scale(0.9);
+        }
+      }
+    }
+  }
+}
+/* end menu */
+
+/* start order */
+.order {
+  background: $peru;
+  .heading {
+    * {
+      color: $white;
+    }
+  }
+  form {
+    padding: 2rem;
+    background: $white;
+    .box-container {
+      display: flex;
+      @include fWrap_fGap;
+      .box {
+        flex: 1 1 41rem;
+        .inputBox {
+          span {
+            color: $light-black;
+            font-size: 2rem;
+          }
+          input,
+          textarea {
+            font-size: 1.7rem;
+            margin: 1rem 0;
+            width: 100%;
+            padding: 1.2rem 1.4rem;
+            color: $light-black;
+            border: $border;
+            &::placeholder {
+              text-transform: capitalize;
+            }
+            &:focus {
+              background: $black;
+              color: $white;
+            }
+            &:focus::placeholder {
+              color: $light-white;
+            }
+          }
+          textarea,
+          .map {
+            height: 17rem;
+          }
+          textarea {
+            resize: none;
+          }
+          .map {
+            margin: 0.8rem 0;
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
+/* end order */
+
+/* start blogs */
+.blogs {
+  background-color: $light-bg;
+  .slide {
+    width: 35rem;
+    .image {
+      height: 25rem;
+      overflow: hidden;
+      position: relative;
+      img {
+        @include imgProps;
+      }
+      span {
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, 0);
+        background: $black;
+        color: $white;
+        padding: 0.5rem 1.5rem;
+        font-size: 2rem;
+        bottom: -10rem;
+      }
+      &:hover img {
+        transform: scale(1.1);
+      }
+      &:hover span {
+        bottom: 1rem;
+      }
+    }
+    .content {
+      padding: 2rem;
+      border: $border;
+      box-shadow: $box-shadow;
+      background: $white;
+      margin-bottom: 5rem;
+      .icon {
+        @include flexProps;
+        margin-bottom: 2rem;
+        a {
+          font-size: 1.5rem;
+          color: $light-black;
+          i {
+            padding-right: 0.7rem;
+            color: $peru;
+          }
+        }
+        &:hover a {
+          color: $peru;
+        }
+      }
+      .title {
+        font-size: 2.5rem;
+        color: $black;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+      p {
+        padding: 1rem 0;
+        line-height: 2;
+        font-size: 1.6rem;
+        color: $light-black;
+      }
+    }
+  }
+}
+/* end blogs */
+
+/* start footer */
+.footer {
+  text-align: center;
+  .icons-container {
+    @include gridProps(25rem);
+    .icons {
+      text-align: center;
+      padding: 3rem 2rem;
+      i {
+        @include centeringIcon;
+        font-size: 2rem;
+        border-radius: 50%;
+        background: $peru;
+        color: $white;
+        margin-bottom: 1rem;
+      }
+      h3 {
+        font-size: 2rem;
+        color: $black;
+        padding: 0.5rem 0;
+      }
+      p {
+        line-height: 1.5;
+        font-size: 1.7rem;
+        color: $light-black;
+        text-transform: capitalize;
+      }
+    }
+  }
+  .share {
+    margin: 2rem 0;
+    a {
+      @include centeringIcon;
+      background: $black;
+      color: $white;
+      margin: 0 0.3rem;
+      font-size: 2.5rem;
+      &:hover {
+        color: $peru;
+      }
+    }
+  }
+  .credit {
+    padding-top: 2rem;
+    margin-top: 2rem;
+    font-size: 2rem;
+    border-top: $border;
+    color: $light-black;
+    span {
+      color: $peru;
+      cursor: pointer;
+    }
+  }
+}
+/* end footer */
